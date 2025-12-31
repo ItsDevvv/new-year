@@ -864,8 +864,7 @@
             </div>
         </div>
     </div>
-
-    <script>
+<script>
         // ==============================================
         // CUSTOMIZE THIS SECTION WITH YOUR PORTRAIT PHOTOS
         // ==============================================
@@ -936,7 +935,6 @@
         // ==============================================
 
         // DOM Elements
-        const surpriseContent = document.getElementById('surprise-content');
         const portraitGallery = document.getElementById('portrait-gallery');
         const featuredPhotoElement = document.getElementById('featured-photo');
         const animatedGraphics = document.getElementById('animated-graphics');
@@ -980,30 +978,6 @@
             
             // Animate message paragraphs with delays
             animateMessageParagraphs();
-        }
-
-        // Create midnight explosion effect
-        function createMidnightExplosion() {
-            // Create lots of fireworks
-            for (let i = 0; i < 80; i++) {
-                setTimeout(() => {
-                    createFirework();
-                }, i * 20);
-            }
-            
-            // Create lots of confetti
-            for (let i = 0; i < 150; i++) {
-                setTimeout(() => {
-                    createConfetti();
-                }, i * 10);
-            }
-            
-            // Create floating hearts
-            for (let i = 0; i < 50; i++) {
-                setTimeout(() => {
-                    createFloatingHeart();
-                }, i * 30);
-            }
         }
 
         // Preload photos
@@ -1056,33 +1030,6 @@
                 
                 portraitGallery.appendChild(portraitItem);
             });
-        }
-
-        // Start animated graphics
-        function startAnimatedGraphics() {
-            // Create floating text messages
-            setInterval(() => {
-                createFloatingText();
-            }, 2000);
-            
-            // Create love lines
-            setInterval(() => {
-                createLoveLine();
-            }, 1500);
-            
-            // Create heart trails
-            setInterval(() => {
-                createHeartTrail();
-            }, 1000);
-            
-            // Initial burst of animations
-            for (let i = 0; i < 10; i++) {
-                setTimeout(() => {
-                    createFloatingText();
-                    if (i % 2 === 0) createLoveLine();
-                    if (i % 3 === 0) createHeartTrail();
-                }, i * 300);
-            }
         }
 
         // Create floating text message
@@ -1159,7 +1106,7 @@
 
         // Create heart trail animation
         function createHeartTrail() {
-            const heartCount = 5;
+            const heartCount = 3; // Reduced from 5
             const startX = Math.random() * animatedGraphics.offsetWidth;
             const startY = Math.random() * animatedGraphics.offsetHeight;
             
@@ -1167,13 +1114,13 @@
                 setTimeout(() => {
                     const heart = document.createElement('div');
                     heart.className = 'heart-trail';
-                    heart.innerHTML = '<i class="fas fa-heart"></i>';
+                    heart.textContent = '❤️'; // Emoji for better performance
                     
                     heart.style.left = `${startX}px`;
                     heart.style.top = `${startY}px`;
                     
                     // Random size
-                    const size = Math.random() * 20 + 15;
+                    const size = Math.random() * 15 + 12;
                     heart.style.fontSize = `${size}px`;
                     
                     // Random color
@@ -1185,8 +1132,8 @@
                     // Animate heart
                     const animation = heart.animate([
                         { opacity: 0, transform: 'translate(0, 0) scale(0.5)' },
-                        { opacity: 1, transform: `translate(${Math.random() * 40 - 20}px, ${Math.random() * 40 - 20}px) scale(1)` },
-                        { opacity: 0, transform: `translate(${Math.random() * 80 - 40}px, ${Math.random() * 80 - 40}px) scale(0.5)` }
+                        { opacity: 1, transform: `translate(${Math.random() * 30 - 15}px, ${Math.random() * 30 - 15}px) scale(1)` },
+                        { opacity: 0, transform: `translate(${Math.random() * 60 - 30}px, ${Math.random() * 60 - 30}px) scale(0.5)` }
                     ], {
                         duration: 2000,
                         easing: 'cubic-bezier(0.215, 0.610, 0.355, 1)'
@@ -1200,28 +1147,237 @@
             }
         }
 
+        // Start animated graphics
+        function startAnimatedGraphics() {
+            // Reduced intervals
+            setInterval(() => {
+                createFloatingText();
+            }, 3000);
+            
+            setInterval(() => {
+                if (Math.random() > 0.7) createLoveLine();
+            }, 2500);
+            
+            setInterval(() => {
+                if (Math.random() > 0.8) createHeartTrail();
+            }, 2000);
+            
+            // Reduced initial burst
+            for (let i = 0; i < 5; i++) {
+                setTimeout(() => {
+                    createFloatingText();
+                    if (i % 3 === 0) createLoveLine();
+                    if (i % 4 === 0) createHeartTrail();
+                }, i * 500);
+            }
+        }
+
+        // OPTIMIZED CONFETTI
+        function createConfetti() {
+            // Reduced from 20 to 6 pieces per call
+            const confettiCount = 6;
+            
+            for (let i = 0; i < confettiCount; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                
+                // Random position
+                const posX = Math.random() * window.innerWidth;
+                const colors = ['#ff2e63', '#08d9d6', '#ffd166', '#ff4081'];
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                
+                confetti.style.left = `${posX}px`;
+                confetti.style.backgroundColor = color;
+                confetti.style.top = '-10px';
+                
+                // Random size
+                const size = Math.random() * 8 + 4;
+                confetti.style.width = `${size}px`;
+                confetti.style.height = `${size}px`;
+                
+                // Simpler shapes for better performance
+                if (Math.random() > 0.5) {
+                    confetti.style.borderRadius = '50%';
+                }
+                
+                document.body.appendChild(confetti);
+                
+                // Faster animation
+                const animation = confetti.animate([
+                    { top: '-10px', opacity: 1, transform: 'rotate(0deg) scale(1)' },
+                    { top: `${window.innerHeight + 10}px`, opacity: 0.7, transform: 'rotate(180deg) scale(0.8)' }
+                ], {
+                    duration: Math.random() * 2000 + 2000,
+                    easing: 'cubic-bezier(0.2, 0.8, 0.3, 1)'
+                });
+                
+                // Remove confetti after animation
+                animation.onfinish = () => {
+                    if (confetti.parentNode) {
+                        confetti.remove();
+                    }
+                };
+            }
+        }
+
+        // OPTIMIZED FIREWORK
+        function createFirework() {
+            const particleCount = 20; // Reduced from 25
+            const posX = Math.random() * window.innerWidth;
+            const posY = Math.random() * (window.innerHeight / 3);
+            const colors = ['#ff2e63', '#08d9d6', '#ffd166'];
+            const color = colors[Math.floor(Math.random() * colors.length)];
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'firework';
+                particle.style.backgroundColor = color;
+                particle.style.left = `${posX}px`;
+                particle.style.top = `${posY}px`;
+                
+                document.body.appendChild(particle);
+                
+                const angle = Math.random() * Math.PI * 2;
+                const velocity = Math.random() * 2 + 1;
+                const distance = Math.random() * 80 + 40;
+                
+                const deltaX = Math.cos(angle) * velocity;
+                const deltaY = Math.sin(angle) * velocity;
+                
+                particle.animate([
+                    { 
+                        transform: 'translate(0, 0) scale(1)', 
+                        opacity: 1 
+                    },
+                    { 
+                        transform: `translate(${deltaX * distance}px, ${deltaY * distance}px) scale(0)`, 
+                        opacity: 0 
+                    }
+                ], {
+                    duration: 1000,
+                    easing: 'cubic-bezier(0.2, 0.8, 0.3, 1)'
+                }).onfinish = () => {
+                    if (particle.parentNode) {
+                        particle.remove();
+                    }
+                };
+            }
+        }
+
+        // OPTIMIZED FLOATING HEARTS
+        function createFloatingHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'floating-heart';
+            heart.textContent = '❤️';
+            
+            // Random position
+            const startX = Math.random() * window.innerWidth;
+            heart.style.left = `${startX}px`;
+            heart.style.top = `${window.innerHeight + 10}px`;
+            
+            // Smaller size
+            const size = Math.random() * 18 + 12;
+            heart.style.fontSize = `${size}px`;
+            heart.style.color = '#ff4081';
+            
+            document.body.appendChild(heart);
+            
+            // Optimized animation
+            const animation = heart.animate([
+                { 
+                    top: `${window.innerHeight + 10}px`, 
+                    opacity: 0, 
+                    transform: 'translateY(0) scale(0.5)' 
+                },
+                { 
+                    top: `${Math.random() * window.innerHeight * 0.5}px`, 
+                    opacity: 0.7, 
+                    transform: 'translateY(-20px) scale(1)' 
+                },
+                { 
+                    top: `-30px`, 
+                    opacity: 0, 
+                    transform: 'translateY(-40px) scale(0.5)' 
+                }
+            ], {
+                duration: Math.random() * 3000 + 2000,
+                easing: 'cubic-bezier(0.2, 0.8, 0.3, 1)'
+            });
+            
+            animation.onfinish = () => {
+                if (heart.parentNode) {
+                    heart.remove();
+                }
+            };
+        }
+
+        // CREATE MIDNIGHT EXPLOSION (OPTIMIZED)
+        function createMidnightExplosion() {
+            // Reduced initial effects
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    createFirework();
+                }, i * 80);
+            }
+            
+            // Reduced confetti
+            for (let i = 0; i < 40; i++) {
+                setTimeout(() => {
+                    createConfetti();
+                }, i * 50);
+            }
+            
+            // Reduced floating hearts
+            for (let i = 0; i < 15; i++) {
+                setTimeout(() => {
+                    createFloatingHeart();
+                }, i * 150);
+            }
+        }
+
+        // Start celebration effects after surprise unlocks
+        function startCelebration() {
+            // Reduced initial effects
+            for (let i = 0; i < 8; i++) {
+                setTimeout(() => {
+                    createFloatingHeart();
+                }, i * 600);
+            }
+            
+            // Optimized intervals with less frequent effects
+            setInterval(() => {
+                if (Math.random() > 0.85) createFloatingHeart();
+                if (Math.random() > 0.95) createConfetti();
+            }, 6000);
+            
+            // Much less frequent fireworks
+            setInterval(() => {
+                if (Math.random() > 0.98) createFirework();
+            }, 12000);
+        }
+
         // Start year transition animation
         function startYearTransition() {
             // Initial state
             year2025.style.opacity = '1';
             year2026.style.opacity = '0.3';
             
-            // Animate transition
+            // Smoother, less CPU-intensive animation
             let opacity2025 = 1;
             let opacity2026 = 0.3;
             let growing = true;
             
             const yearAnimation = setInterval(() => {
                 if (growing) {
-                    opacity2025 -= 0.02;
-                    opacity2026 += 0.02;
+                    opacity2025 -= 0.015;
+                    opacity2026 += 0.015;
                     
                     if (opacity2025 <= 0.3) {
                         growing = false;
                     }
                 } else {
-                    opacity2025 += 0.02;
-                    opacity2026 -= 0.02;
+                    opacity2025 += 0.015;
+                    opacity2026 -= 0.015;
                     
                     if (opacity2025 >= 1) {
                         growing = true;
@@ -1231,439 +1387,110 @@
                 year2025.style.opacity = opacity2025;
                 year2026.style.opacity = opacity2026;
                 
-                // Add glow effect
-                year2025.style.textShadow = `0 0 ${30 * opacity2025}px rgba(255, 64, 129, 0.7)`;
-                year2026.style.textShadow = `0 0 ${30 * opacity2026}px rgba(8, 217, 214, 0.7)`;
-            }, 50);
+                // Simpler glow effect
+                year2025.style.textShadow = `0 0 ${20 * opacity2025}px rgba(255, 64, 129, 0.7)`;
+                year2026.style.textShadow = `0 0 ${20 * opacity2026}px rgba(8, 217, 214, 0.7)`;
+            }, 80);
             
-            // Stop after a while
+            // Stop earlier
             setTimeout(() => {
                 clearInterval(yearAnimation);
                 year2025.style.opacity = '0.5';
                 year2026.style.opacity = '1';
-                year2025.style.textShadow = '0 0 15px rgba(255, 64, 129, 0.5)';
-                year2026.style.textShadow = '0 0 30px rgba(8, 217, 214, 0.7)';
-            }, 5000);
+                year2025.style.textShadow = '0 0 10px rgba(255, 64, 129, 0.5)';
+                year2026.style.textShadow = '0 0 20px rgba(8, 217, 214, 0.7)';
+            }, 4000);
         }
 
-        // Animate message paragraphs with delays
+        // OPTIMIZED MESSAGE ANIMATIONS
         function animateMessageParagraphs() {
             const paragraphs = document.querySelectorAll('.message-paragraph');
+            
+            // Staggered animation
             paragraphs.forEach((para, index) => {
-                setTimeout(() => {
-                    para.style.animation = 'floatUp 1s ease-out';
-                }, index * 200);
+                // Only animate visible paragraphs
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            setTimeout(() => {
+                                para.style.animation = 'floatUp 0.8s ease-out';
+                                para.style.opacity = '1';
+                                para.style.transform = 'translateY(0)';
+                            }, index * 150);
+                            observer.unobserve(para);
+                        }
+                    });
+                }, { threshold: 0.3 });
+                
+                observer.observe(para);
             });
         }
 
-// OPTIMIZED CONFETTI & ANIMATIONS
-
-// Create optimized confetti
-function createConfetti() {
-    // Reduced from 20 to 8 pieces per call
-    const confettiCount = 8;
-    
-    for (let i = 0; i < confettiCount; i++) {
-        const confetti = document.createElement('div');
-        confetti.className = 'confetti';
-        
-        // Random position
-        const posX = Math.random() * window.innerWidth;
-        const colors = ['#ff2e63', '#08d9d6', '#ffd166', '#ff4081'];
-        const color = colors[Math.floor(Math.random() * colors.length)];
-        
-        confetti.style.left = `${posX}px`;
-        confetti.style.backgroundColor = color;
-        
-        // Random size
-        const size = Math.random() * 8 + 4;
-        confetti.style.width = `${size}px`;
-        confetti.style.height = `${size}px`;
-        
-        // Simpler shapes for better performance
-        if (Math.random() > 0.5) {
-            confetti.style.borderRadius = '50%';
-        }
-        
-        document.body.appendChild(confetti);
-        
-        // Faster animation
-        const animation = confetti.animate([
-            { top: '-10px', opacity: 1, transform: 'rotate(0deg) scale(1)' },
-            { top: `${window.innerHeight + 10}px`, opacity: 0.7, transform: 'rotate(180deg) scale(0.8)' }
-        ], {
-            duration: Math.random() * 2000 + 2000, // Reduced duration
-            easing: 'cubic-bezier(0.2, 0.8, 0.3, 1)'
-        });
-        
-        // Remove confetti after animation
-        animation.onfinish = () => {
-            confetti.remove();
-        };
-    }
-}
-
-// OPTIMIZED FIREWORK (Reduced particles)
-function createFirework() {
-    const particleCount = 25; // Reduced from 50
-    const posX = Math.random() * window.innerWidth;
-    const posY = Math.random() * (window.innerHeight / 3); // Start higher
-    const colors = ['#ff2e63', '#08d9d6', '#ffd166'];
-    const color = colors[Math.floor(Math.random() * colors.length)];
-    
-    for (let i = 0; i < particleCount; i++) {
-        const particle = document.createElement('div');
-        particle.className = 'firework';
-        particle.style.backgroundColor = color;
-        particle.style.left = `${posX}px`;
-        particle.style.top = `${posY}px`;
-        
-        document.body.appendChild(particle);
-        
-        // Optimized animation using CSS animation
-        const angle = Math.random() * Math.PI * 2;
-        const velocity = Math.random() * 3 + 1.5;
-        const distance = Math.random() * 100 + 60;
-        
-        const deltaX = Math.cos(angle) * velocity;
-        const deltaY = Math.sin(angle) * velocity;
-        
-        // Use CSS animation for better performance
-        particle.animate([
-            { 
-                transform: 'translate(0, 0) scale(1)', 
-                opacity: 1 
-            },
-            { 
-                transform: `translate(${deltaX * 20}px, ${deltaY * 20}px) scale(0.8)`, 
-                opacity: 0.8 
-            },
-            { 
-                transform: `translate(${deltaX * 40}px, ${deltaY * 40}px) scale(0.6)`, 
-                opacity: 0.6 
-            },
-            { 
-                transform: `translate(${deltaX * distance}px, ${deltaY * distance}px) scale(0)`, 
-                opacity: 0 
-            }
-        ], {
-            duration: 1200,
-            easing: 'cubic-bezier(0.2, 0.8, 0.3, 1)'
-        }).onfinish = () => particle.remove();
-    }
-}
-
-// OPTIMIZED FLOATING ELEMENTS
-function createFloatingHeart() {
-    const heart = document.createElement('div');
-    heart.className = 'floating-heart';
-    heart.innerHTML = '❤️'; // Using emoji instead of icon for better performance
-    
-    // Random position
-    const startX = Math.random() * window.innerWidth;
-    heart.style.left = `${startX}px`;
-    heart.style.top = `${window.innerHeight + 10}px`;
-    
-    // Smaller size
-    const size = Math.random() * 20 + 15;
-    heart.style.fontSize = `${size}px`;
-    
-    document.body.appendChild(heart);
-    
-    // Optimized animation
-    const animation = heart.animate([
-        { 
-            top: `${window.innerHeight + 10}px`, 
-            opacity: 0, 
-            transform: 'translateY(0) scale(0.5)' 
-        },
-        { 
-            top: `${Math.random() * window.innerHeight * 0.5}px`, 
-            opacity: 0.7, 
-            transform: 'translateY(-20px) scale(1)' 
-        },
-        { 
-            top: `-30px`, 
-            opacity: 0, 
-            transform: 'translateY(-40px) scale(0.5)' 
-        }
-    ], {
-        duration: Math.random() * 3000 + 2000,
-        easing: 'cubic-bezier(0.2, 0.8, 0.3, 1)'
-    });
-    
-    animation.onfinish = () => heart.remove();
-}
-
-// CREATE MIDNIGHT EXPLOSION (OPTIMIZED)
-function createMidnightExplosion() {
-    // Reduced initial effects
-    for (let i = 0; i < 30; i++) { // Reduced from 80
-        setTimeout(() => {
-            createFirework();
-        }, i * 50); // Increased delay
-    }
-    
-    // Reduced confetti
-    for (let i = 0; i < 60; i++) { // Reduced from 150
-        setTimeout(() => {
-            createConfetti();
-        }, i * 30); // Increased delay
-    }
-    
-    // Reduced floating hearts
-    for (let i = 0; i < 20; i++) { // Reduced from 50
-        setTimeout(() => {
-            createFloatingHeart();
-        }, i * 100); // Increased delay
-    }
-}
-
-// START CELEBRATION (OPTIMIZED)
-function startCelebration() {
-    // Reduced initial effects
-    for (let i = 0; i < 12; i++) { // Reduced from 25
-        setTimeout(() => {
-            createFloatingHeart();
-        }, i * 500);
-    }
-    
-    // Optimized intervals with less frequent effects
-    setInterval(() => {
-        if (Math.random() > 0.85) createFloatingHeart(); // Less frequent
-        if (Math.random() > 0.95) createConfetti(); // Much less frequent
-    }, 5000); // Increased interval
-    
-    // Much less frequent fireworks
-    setInterval(() => {
-        if (Math.random() > 0.98) createFirework(); // Rare fireworks
-    }, 10000);
-}
-
-// OPTIMIZED MESSAGE ANIMATIONS
-function animateMessageParagraphs() {
-    const paragraphs = document.querySelectorAll('.message-paragraph');
-    
-    // Staggered animation with fewer animations at once
-    paragraphs.forEach((para, index) => {
-        // Only animate visible paragraphs
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    setTimeout(() => {
-                        para.style.animation = 'floatUp 0.8s ease-out';
-                        para.style.opacity = '1';
-                        para.style.transform = 'translateY(0)';
-                    }, index * 150); // Increased delay
-                    observer.unobserve(para);
+        // OPTIMIZED CLICK HEARTS
+        function createClickHeart(x, y) {
+            const heart = document.createElement('div');
+            heart.textContent = '❤️';
+            heart.style.position = 'fixed';
+            heart.style.left = `${x}px`;
+            heart.style.top = `${y}px`;
+            heart.style.color = '#ff4081';
+            heart.style.fontSize = '20px';
+            heart.style.pointerEvents = 'none';
+            heart.style.zIndex = '1000';
+            heart.style.transform = 'translate(-50%, -50%)';
+            
+            document.body.appendChild(heart);
+            
+            // Optimized animation
+            const animation = heart.animate([
+                { 
+                    transform: 'translate(-50%, -50%) scale(0.5)', 
+                    opacity: 1 
+                },
+                { 
+                    transform: 'translate(-50%, -80px) scale(1.2)', 
+                    opacity: 0.8 
+                },
+                { 
+                    transform: 'translate(-50%, -120px) scale(0)', 
+                    opacity: 0 
                 }
-            });
-        }, { threshold: 0.3 });
-        
-        observer.observe(para);
-    });
-}
-
-// OPTIMIZED CLICK HEARTS
-function createClickHeart(x, y) {
-    const heart = document.createElement('div');
-    heart.textContent = '❤️'; // Emoji for better performance
-    heart.style.position = 'fixed';
-    heart.style.left = `${x}px`;
-    heart.style.top = `${y}px`;
-    heart.style.color = '#ff4081';
-    heart.style.fontSize = '20px'; // Smaller
-    heart.style.pointerEvents = 'none';
-    heart.style.zIndex = '1000';
-    heart.style.transform = 'translate(-50%, -50%)';
-    
-    document.body.appendChild(heart);
-    
-    // Optimized animation
-    const animation = heart.animate([
-        { 
-            transform: 'translate(-50%, -50%) scale(0.5)', 
-            opacity: 1 
-        },
-        { 
-            transform: 'translate(-50%, -80px) scale(1.2)', 
-            opacity: 0.8 
-        },
-        { 
-            transform: 'translate(-50%, -120px) scale(0)', 
-            opacity: 0 
-        }
-    ], {
-        duration: 1000, // Faster
-        easing: 'cubic-bezier(0.2, 0.8, 0.3, 1)'
-    });
-    
-    animation.onfinish = () => heart.remove();
-}
-
-// OPTIMIZED ANIMATED GRAPHICS (For header area)
-function startAnimatedGraphics() {
-    // Reduced intervals
-    setInterval(() => {
-        createFloatingText();
-    }, 3000); // Increased from 2000
-    
-    setInterval(() => {
-        if (Math.random() > 0.7) createLoveLine(); // Less frequent
-    }, 2500); // Increased from 1500
-    
-    setInterval(() => {
-        if (Math.random() > 0.8) createHeartTrail(); // Less frequent
-    }, 2000); // Increased from 1000
-    
-    // Reduced initial burst
-    for (let i = 0; i < 5; i++) { // Reduced from 10
-        setTimeout(() => {
-            createFloatingText();
-            if (i % 3 === 0) createLoveLine(); // Less frequent
-            if (i % 4 === 0) createHeartTrail(); // Less frequent
-        }, i * 500); // Increased delay
-    }
-}
-
-// OPTIMIZED YEAR TRANSITION
-function startYearTransition() {
-    // Initial state
-    year2025.style.opacity = '1';
-    year2026.style.opacity = '0.3';
-    
-    // Smoother, less CPU-intensive animation
-    let opacity2025 = 1;
-    let opacity2026 = 0.3;
-    let growing = true;
-    
-    const yearAnimation = setInterval(() => {
-        if (growing) {
-            opacity2025 -= 0.015; // Slower
-            opacity2026 += 0.015;
-            
-            if (opacity2025 <= 0.3) {
-                growing = false;
-            }
-        } else {
-            opacity2025 += 0.015;
-            opacity2026 -= 0.015;
-            
-            if (opacity2025 >= 1) {
-                growing = true;
-            }
-        }
-        
-        year2025.style.opacity = opacity2025;
-        year2026.style.opacity = opacity2026;
-        
-        // Simpler glow effect
-        year2025.style.textShadow = `0 0 ${20 * opacity2025}px rgba(255, 64, 129, 0.7)`;
-        year2026.style.textShadow = `0 0 ${20 * opacity2026}px rgba(8, 217, 214, 0.7)`;
-    }, 80); // Increased interval
-    
-    // Stop earlier
-    setTimeout(() => {
-        clearInterval(yearAnimation);
-        year2025.style.opacity = '0.5';
-        year2026.style.opacity = '1';
-        year2025.style.textShadow = '0 0 10px rgba(255, 64, 129, 0.5)';
-        year2026.style.textShadow = '0 0 20px rgba(8, 217, 214, 0.7)';
-    }, 4000); // Reduced from 5000
-}
-
-// ADD CSS FOR OPTIMIZED PERFORMANCE
-const style = document.createElement('style');
-style.textContent = `
-    /* Optimize animations for performance */
-    .confetti, .firework, .floating-heart, .floating-sparkle {
-        will-change: transform, opacity;
-        transform: translateZ(0);
-        backface-visibility: hidden;
-    }
-    
-    /* Message paragraph optimized animations */
-    .message-paragraph {
-        opacity: 0;
-        transform: translateY(20px);
-        transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-    
-    /* Reduced particle sizes */
-    .confetti {
-        width: 8px;
-        height: 8px;
-    }
-    
-    .firework {
-        width: 4px;
-        height: 4px;
-    }
-    
-    .floating-heart {
-        font-size: 18px;
-    }
-`;
-document.head.appendChild(style);
-       
-        // Create floating sparkle
-        function createFloatingSparkle() {
-            const sparkle = document.createElement('div');
-            sparkle.className = 'floating-sparkle';
-            sparkle.innerHTML = '<i class="fas fa-star"></i>';
-            
-            // Random position
-            const startX = Math.random() * window.innerWidth;
-            sparkle.style.left = `${startX}px`;
-            sparkle.style.top = `${window.innerHeight + 20}px`;
-            
-            // Random size
-            const size = Math.random() * 20 + 15;
-            sparkle.style.fontSize = `${size}px`;
-            
-            // Random color
-            const colors = ['#ffd166', '#08d9d6', '#ff9ff3'];
-            sparkle.style.color = colors[Math.floor(Math.random() * colors.length)];
-            
-            document.body.appendChild(sparkle);
-            
-            // Animate sparkle floating up
-            const animation = sparkle.animate([
-                { top: `${window.innerHeight + 20}px`, opacity: 0, transform: 'scale(0.5) rotate(0deg)' },
-                { top: `${Math.random() * window.innerHeight * 0.6}px`, opacity: 0.7, transform: 'scale(1) rotate(180deg)' },
-                { top: `-50px`, opacity: 0, transform: 'scale(0.5) rotate(360deg)' }
             ], {
-                duration: Math.random() * 7000 + 5000,
-                easing: 'cubic-bezier(0.215, 0.610, 0.355, 1)'
+                duration: 1000,
+                easing: 'cubic-bezier(0.2, 0.8, 0.3, 1)'
             });
             
-            // Remove sparkle after animation
             animation.onfinish = () => {
-                sparkle.remove();
+                if (heart.parentNode) {
+                    heart.remove();
+                }
             };
         }
 
-        // Start background music with interaction handling
+        // Start background music with interaction handling - FIXED
         function startMusicWithInteraction() {
             backgroundMusic.volume = 0.4;
             
-            // Try to play immediately
-            backgroundMusic.play().then(() => {
-                console.log("Music started successfully");
-                playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
-            }).catch(error => {
-                console.log("Autoplay blocked, waiting for user interaction");
-                playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
-                
-                // Add a click listener to start music on first user interaction
-                const startOnInteraction = () => {
-                    backgroundMusic.play().then(() => {
-                        playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
-                    });
-                    document.removeEventListener('click', startOnInteraction);
-                };
-                document.addEventListener('click', startOnInteraction);
-            });
+            // Try to play immediately with user gesture
+            const playMusic = () => {
+                backgroundMusic.play().then(() => {
+                    console.log("Music started successfully");
+                    playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                }).catch(error => {
+                    console.log("Autoplay blocked:", error);
+                    playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+                });
+            };
+            
+            // Try to play on page load (might be blocked by browsers)
+            playMusic();
+            
+            // Add click listener to start music if autoplay blocked
+            const startOnInteraction = () => {
+                playMusic();
+                document.removeEventListener('click', startOnInteraction);
+            };
+            document.addEventListener('click', startOnInteraction);
         }
 
         // Music player controls
@@ -1701,7 +1528,45 @@ document.head.appendChild(style);
             }
         });
 
-
- </script>
+        // Add CSS for optimized performance
+        const style = document.createElement('style');
+        style.textContent = `
+            /* Optimize animations for performance */
+            .confetti, .firework, .floating-heart, .floating-sparkle {
+                will-change: transform, opacity;
+                transform: translateZ(0);
+                backface-visibility: hidden;
+            }
+            
+            /* Message paragraph optimized animations */
+            .message-paragraph {
+                opacity: 0;
+                transform: translateY(20px);
+                transition: opacity 0.6s ease, transform 0.6s ease;
+            }
+            
+            /* Reduced particle sizes */
+            .confetti {
+                width: 8px;
+                height: 8px;
+            }
+            
+            .firework {
+                width: 4px;
+                height: 4px;
+            }
+            
+            .floating-heart {
+                font-size: 18px;
+            }
+            
+            /* Ensure music plays on mobile */
+            #background-music {
+                display: none;
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
 </body>
 </html>
+
