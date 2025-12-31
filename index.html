@@ -34,137 +34,15 @@
             overflow-x: hidden;
         }
 
-        /* Countdown Screen */
+        /* Remove countdown screen styles */
         #countdown-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            background: radial-gradient(circle at center, #1a1a2e 0%, #16213e 70%, #0f3460 100%);
-            transition: opacity 1.5s ease, transform 1.5s ease;
-        }
-
-        .countdown-container {
-            text-align: center;
-            padding: 40px;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border-radius: 30px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3),
-                        inset 0 1px 0 rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            max-width: 800px;
-            margin: 20px;
-        }
-
-        .countdown-title {
-            font-family: 'Dancing Script', cursive;
-            font-size: 4rem;
-            color: var(--love-color);
-            margin-bottom: 20px;
-            text-shadow: var(--text-glow);
-            animation: pulse 2s infinite alternate;
-        }
-
-        .countdown-subtitle {
-            font-size: 1.4rem;
-            margin-bottom: 40px;
-            color: var(--accent-color);
-            max-width: 600px;
-            line-height: 1.6;
-        }
-
-        .countdown-display {
-            display: flex;
-            justify-content: center;
-            gap: 25px;
-            margin-bottom: 40px;
-            flex-wrap: wrap;
-        }
-
-        .countdown-unit {
-            background: rgba(255, 255, 255, 0.08);
-            border-radius: 20px;
-            padding: 25px 15px;
-            min-width: 140px;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease;
-        }
-
-        .countdown-unit:hover {
-            transform: translateY(-10px);
-        }
-
-        .countdown-unit:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
-        }
-
-        .countdown-value {
-            font-size: 4rem;
-            font-weight: 700;
-            color: var(--secondary-color);
-            text-shadow: 0 0 20px rgba(8, 217, 214, 0.7);
-            line-height: 1;
-            margin-bottom: 5px;
-        }
-
-        .countdown-label {
-            font-size: 1.2rem;
-            color: var(--accent-color);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .midnight-message {
-            font-size: 1.5rem;
-            color: var(--love-color);
-            margin-top: 30px;
-            font-family: 'Great Vibes', cursive;
-            text-shadow: var(--text-glow);
-        }
-
-        .current-time {
-            margin-top: 20px;
-            font-size: 1.2rem;
-            color: var(--light-color);
-            background: rgba(0, 0, 0, 0.3);
-            padding: 10px 20px;
-            border-radius: 50px;
-            display: inline-block;
-        }
-
-        .time-zone {
-            color: var(--accent-color);
-            font-weight: 600;
-        }
-
-        /* Heart beat animation */
-        .heart-beat {
-            font-size: 3rem;
-            color: var(--love-color);
-            animation: heartbeat 1.5s infinite;
-            margin: 20px 0;
-        }
-
-        /* Surprise Content - Initially Hidden */
-        #surprise-content {
             display: none;
-            opacity: 0;
-            transition: opacity 2s ease;
+        }
+
+        /* Show surprise content immediately */
+        #surprise-content {
+            display: block;
+            opacity: 1;
         }
 
         .container {
@@ -758,19 +636,6 @@
                 height: 400px;
             }
             
-            .countdown-title {
-                font-size: 3rem;
-            }
-            
-            .countdown-unit {
-                min-width: 120px;
-                padding: 20px 10px;
-            }
-            
-            .countdown-value {
-                font-size: 3rem;
-            }
-            
             .year {
                 font-size: 6rem;
             }
@@ -816,14 +681,6 @@
                 height: 350px;
             }
             
-            .countdown-display {
-                gap: 15px;
-            }
-            
-            .countdown-unit {
-                min-width: 100px;
-            }
-            
             .year {
                 font-size: 4.5rem;
             }
@@ -836,51 +693,13 @@
     </style>
 </head>
 <body>
-    <!-- Countdown Screen (Shows until midnight IST) -->
-    <div id="countdown-screen">
-        <div class="countdown-container">
-            <div class="heart-beat">
-                <i class="fas fa-heart"></i>
-            </div>
-            <h1 class="countdown-title">My Dearest Love ❤️</h1>
-            <p class="countdown-subtitle">A special New Year surprise is waiting for you at midnight. Every moment brings us closer to celebrating our love and our beautiful journey together.</p>
-            
-            <div class="countdown-display">
-                <div class="countdown-unit">
-                    <div class="countdown-value" id="countdown-hours">00</div>
-                    <div class="countdown-label">Hours</div>
-                </div>
-                <div class="countdown-unit">
-                    <div class="countdown-value" id="countdown-minutes">00</div>
-                    <div class="countdown-label">Minutes</div>
-                </div>
-                <div class="countdown-unit">
-                    <div class="countdown-value" id="countdown-seconds">00</div>
-                    <div class="countdown-label">Seconds</div>
-                </div>
-            </div>
-            
-            <div class="midnight-message">
-                The magic begins at midnight IST
-            </div>
-            
-            <div class="current-time">
-                Current Indian Time: <span class="time-zone" id="current-time">Loading...</span>
-            </div>
-            
-            <div style="margin-top: 40px; font-size: 1.1rem; color: var(--accent-color);">
-                <i class="fas fa-music"></i> Turn up your volume for the full romantic experience
-            </div>
-        </div>
-    </div>
-
-    <!-- Surprise Content (Hidden until midnight IST) -->
+    <!-- Surprise Content (Shows immediately) -->
     <div id="surprise-content">
         <div class="container">
             <!-- Header -->
             <header class="surprise-header">
                 <h1 class="surprise-title">Happy New Year, My Love! 🎉</h1>
-                <p class="love-subtitle">To My Amazing Boyfriend</p>
+                <p class="love-subtitle">To My Amazing Love</p>
                 <p class="header-date">Five Years of Love & Counting...</p>
                 
                 <!-- Animated Graphics Container -->
@@ -1026,9 +845,6 @@
             <footer class="surprise-footer">
                 <p>Made with <span class="footer-heart"><i class="fas fa-heart"></i></span> for the love of my life</p>
                 <p style="margin-top: 15px; color: var(--accent-color);">Happy New Year, my love! Here's to many more years together.</p>
-                <div style="margin-top: 30px; font-size: 1rem; opacity: 0.8;">
-                    <i class="fas fa-clock"></i> This surprise was specially timed for midnight IST
-                </div>
             </footer>
 
             <!-- Music Player -->
@@ -1041,7 +857,7 @@
                     <button id="play-pause-btn"><i class="fas fa-play"></i></button>
                     <button id="volume-btn"><i class="fas fa-volume-up"></i></button>
                 </div>
-               <audio id="background-music" loop autoplay>
+                <audio id="background-music" loop>
                     <!-- Replace with your special song -->
                     <source src="song.mp3" type="audio/mpeg">
                 </audio>
@@ -1120,12 +936,7 @@
         // ==============================================
 
         // DOM Elements
-        const countdownScreen = document.getElementById('countdown-screen');
         const surpriseContent = document.getElementById('surprise-content');
-        const countdownHours = document.getElementById('countdown-hours');
-        const countdownMinutes = document.getElementById('countdown-minutes');
-        const countdownSeconds = document.getElementById('countdown-seconds');
-        const currentTimeElement = document.getElementById('current-time');
         const portraitGallery = document.getElementById('portrait-gallery');
         const featuredPhotoElement = document.getElementById('featured-photo');
         const animatedGraphics = document.getElementById('animated-graphics');
@@ -1135,194 +946,63 @@
         const playPauseBtn = document.getElementById('play-pause-btn');
         const volumeBtn = document.getElementById('volume-btn');
 
-        // For testing: Set this to true to bypass the midnight lock
-        const TEST_MODE = false; // Set to true to test immediately, false for actual midnight surprise
-
-        // Get current time in IST (Indian Standard Time: UTC+5:30)
-        function getCurrentIST() {
-            const now = new Date();
-            // Convert to IST (UTC+5:30)
-            const offset = 5.5 * 60 * 60 * 1000; // 5.5 hours in milliseconds
-            const istTime = new Date(now.getTime() + offset);
-            return istTime;
-        }
-
-        // Format time to two digits
-        function formatTime(num) {
-            return num.toString().padStart(2, '0');
-        }
-
-        // Initialize the page
+        // Initialize the page - START IMMEDIATELY
         document.addEventListener('DOMContentLoaded', function() {
-            // Start countdown to midnight IST
-            updateCountdown();
-            setInterval(updateCountdown, 1000);
+            // Start celebration immediately
+            unlockSurprise();
             
-            // Update current time display
-            updateCurrentTime();
-            setInterval(updateCurrentTime, 1000);
-            
-            // Preload photos for when surprise unlocks
+            // Preload photos
             preloadPhotos();
             
-            // Create floating hearts during countdown
-            createFloatingHearts();
-            
-            // For testing: Uncomment next line to see the surprise immediately
-            // if (TEST_MODE) unlockSurprise();
+            // Start background music with autoplay handling
+            startMusicWithInteraction();
         });
 
-        // Update countdown to midnight IST
-        function updateCountdown() {
-            const now = getCurrentIST();
-            const currentHours = now.getUTCHours();
-            const currentMinutes = now.getUTCMinutes();
-            const currentSeconds = now.getUTCSeconds();
-            
-            // Calculate time until midnight IST
-            const hoursUntilMidnight = (23 - currentHours + 24) % 24;
-            const minutesUntilMidnight = (59 - currentMinutes + 60) % 60;
-            const secondsUntilMidnight = (59 - currentSeconds + 60) % 60;
-            
-            // Adjust for the minute/second rollover
-            let displayHours = hoursUntilMidnight;
-            let displayMinutes = minutesUntilMidnight;
-            let displaySeconds = secondsUntilMidnight;
-            
-            if (currentSeconds === 59) {
-                if (currentMinutes === 59) {
-                    displayHours = hoursUntilMidnight;
-                }
-                displayMinutes = minutesUntilMidnight;
-            }
-            
-            // Update display
-            countdownHours.textContent = formatTime(displayHours);
-            countdownMinutes.textContent = formatTime(displayMinutes);
-            countdownSeconds.textContent = formatTime(displaySeconds);
-            
-            // Check if it's midnight IST (00:00:00) or test mode
-            if ((currentHours === 0 && currentMinutes === 0 && currentSeconds === 0) || TEST_MODE) {
-                unlockSurprise();
-            }
-            
-            // Special effects in last 10 seconds
-            if (currentHours === 23 && currentMinutes === 59 && currentSeconds >= 50) {
-                createCountdownEffects();
-            }
-        }
-
-        // Update current time display
-        function updateCurrentTime() {
-            const now = getCurrentIST();
-            const hours = now.getUTCHours();
-            const minutes = now.getUTCMinutes();
-            const seconds = now.getUTCSeconds();
-            
-            // Format to 12-hour time with AM/PM
-            let displayHours = hours % 12;
-            if (displayHours === 0) displayHours = 12;
-            const ampm = hours >= 12 ? 'PM' : 'AM';
-            
-            currentTimeElement.textContent = `${formatTime(displayHours)}:${formatTime(minutes)}:${formatTime(seconds)} ${ampm} IST`;
-        }
-
-        // Unlock the surprise at midnight IST
+        // Unlock the surprise immediately
         function unlockSurprise() {
-            // Create explosion of effects
+            // Create initial explosion of effects
             createMidnightExplosion();
             
-            // Fade out countdown
-            countdownScreen.style.opacity = '0';
-            countdownScreen.style.transform = 'scale(1.5)';
+            // Load photos and message
+            loadPortraitPhotos();
+            if (featuredPhoto) {
+                featuredPhotoElement.src = featuredPhoto;
+            }
             
-            // After fade, hide countdown and show surprise
-            setTimeout(() => {
-                countdownScreen.style.display = 'none';
-                surpriseContent.style.display = 'block';
-                
-                // Fade in surprise
-                setTimeout(() => {
-                    surpriseContent.style.opacity = '1';
-                    
-                    // Load photos and message
-                    loadPortraitPhotos();
-                    featuredPhotoElement.src = featuredPhoto;
-                    
-                    // Start animated graphics
-                    startAnimatedGraphics();
-                    
-                    // Start year transition animation
-                    startYearTransition();
-                    
-                    // Start background music
-                    // Start background music with autoplay handling
-                        backgroundMusic.volume = 0.4; // Start at lower volume
-                        function startMusic() {
-                            backgroundMusic.play().then(() => {
-                                console.log("Music started successfully");
-                                playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
-                            }).catch(error => {
-                                console.log("Autoplay blocked, waiting for user interaction");
-                                // Add a click listener to start music on first user interaction
-                                const startOnInteraction = () => {
-                                    backgroundMusic.play();
-                                    playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
-                                    document.removeEventListener('click', startOnInteraction);
-                                };
-                                document.addEventListener('click', startOnInteraction);
-                            });
-                        }
-
-                        // Start the music
-                        startMusic();
-                    // Start celebration effects
-                    startCelebration();
-                    
-                    // Animate message paragraphs with delays
-                    animateMessageParagraphs();
-                }, 100);
-            }, 1500);
+            // Start animated graphics
+            startAnimatedGraphics();
+            
+            // Start year transition animation
+            startYearTransition();
+            
+            // Start celebration effects
+            startCelebration();
+            
+            // Animate message paragraphs with delays
+            animateMessageParagraphs();
         }
 
         // Create midnight explosion effect
         function createMidnightExplosion() {
             // Create lots of fireworks
-            for (let i = 0; i < 100; i++) {
+            for (let i = 0; i < 80; i++) {
                 setTimeout(() => {
                     createFirework();
                 }, i * 20);
             }
             
             // Create lots of confetti
-            for (let i = 0; i < 200; i++) {
+            for (let i = 0; i < 150; i++) {
                 setTimeout(() => {
                     createConfetti();
                 }, i * 10);
             }
             
             // Create floating hearts
-            for (let i = 0; i < 60; i++) {
+            for (let i = 0; i < 50; i++) {
                 setTimeout(() => {
                     createFloatingHeart();
                 }, i * 30);
-            }
-        }
-
-        // Create special effects during last 10 seconds of countdown
-        function createCountdownEffects() {
-            const now = getCurrentIST();
-            const seconds = now.getUTCSeconds();
-            
-            // More intense effects as we get closer to midnight
-            const intensity = 60 - seconds;
-            
-            if (Math.random() > (0.9 - intensity/100)) {
-                createFirework();
-            }
-            
-            if (Math.random() > (0.8 - intensity/200)) {
-                createConfetti();
             }
         }
 
@@ -1335,8 +1015,10 @@
                 }
             });
             
-            const featuredImg = new Image();
-            featuredImg.src = featuredPhoto;
+            if (featuredPhoto) {
+                const featuredImg = new Image();
+                featuredImg.src = featuredPhoto;
+            }
         }
 
         // Load portrait photos into the gallery
@@ -1574,111 +1256,356 @@
             });
         }
 
-  // Start celebration effects after surprise unlocks
-function startCelebration() {
-    // Create initial hearts and sparkles
-    for (let i = 0; i < 25; i++) {
-        setTimeout(() => {
-            createFloatingHeart();
-        }, i * 300);
-    }
+// OPTIMIZED CONFETTI & ANIMATIONS
+
+// Create optimized confetti
+function createConfetti() {
+    // Reduced from 20 to 8 pieces per call
+    const confettiCount = 8;
     
-    for (let i = 0; i < 20; i++) {
-        setTimeout(() => {
-            createFloatingSparkle();
-        }, i * 400);
-    }
-    
-    // Continuous effects
-    setInterval(() => {
-        if (Math.random() > 0.7) createFloatingHeart();
-        if (Math.random() > 0.8) createFloatingSparkle();
-        if (Math.random() > 0.9) createConfetti();
-    }, 3000);
-    
-    // Occasional fireworks
-    setInterval(() => {
-        if (Math.random() > 0.95) createFirework();
-    }, 5000);
-    
-    // Start background music with autoplay handling
-    backgroundMusic.volume = 0.4; // Start at lower volume
-    function startMusic() {
-        backgroundMusic.play().then(() => {
-            console.log("Music started successfully");
-            playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
-        }).catch(error => {
-            console.log("Autoplay blocked, waiting for user interaction");
-            // Add a click listener to start music on first user interaction
-            const startOnInteraction = () => {
-                backgroundMusic.play();
-                playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
-                document.removeEventListener('click', startOnInteraction);
-            };
-            document.addEventListener('click', startOnInteraction);
+    for (let i = 0; i < confettiCount; i++) {
+        const confetti = document.createElement('div');
+        confetti.className = 'confetti';
+        
+        // Random position
+        const posX = Math.random() * window.innerWidth;
+        const colors = ['#ff2e63', '#08d9d6', '#ffd166', '#ff4081'];
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        
+        confetti.style.left = `${posX}px`;
+        confetti.style.backgroundColor = color;
+        
+        // Random size
+        const size = Math.random() * 8 + 4;
+        confetti.style.width = `${size}px`;
+        confetti.style.height = `${size}px`;
+        
+        // Simpler shapes for better performance
+        if (Math.random() > 0.5) {
+            confetti.style.borderRadius = '50%';
+        }
+        
+        document.body.appendChild(confetti);
+        
+        // Faster animation
+        const animation = confetti.animate([
+            { top: '-10px', opacity: 1, transform: 'rotate(0deg) scale(1)' },
+            { top: `${window.innerHeight + 10}px`, opacity: 0.7, transform: 'rotate(180deg) scale(0.8)' }
+        ], {
+            duration: Math.random() * 2000 + 2000, // Reduced duration
+            easing: 'cubic-bezier(0.2, 0.8, 0.3, 1)'
         });
+        
+        // Remove confetti after animation
+        animation.onfinish = () => {
+            confetti.remove();
+        };
     }
-    
-    // Start the music
-    startMusic();
 }
 
-        // Create floating hearts during countdown
-        function createFloatingHearts() {
-            setInterval(() => {
-                if (Math.random() > 0.9) {
-                    createFloatingHeart();
+// OPTIMIZED FIREWORK (Reduced particles)
+function createFirework() {
+    const particleCount = 25; // Reduced from 50
+    const posX = Math.random() * window.innerWidth;
+    const posY = Math.random() * (window.innerHeight / 3); // Start higher
+    const colors = ['#ff2e63', '#08d9d6', '#ffd166'];
+    const color = colors[Math.floor(Math.random() * colors.length)];
+    
+    for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'firework';
+        particle.style.backgroundColor = color;
+        particle.style.left = `${posX}px`;
+        particle.style.top = `${posY}px`;
+        
+        document.body.appendChild(particle);
+        
+        // Optimized animation using CSS animation
+        const angle = Math.random() * Math.PI * 2;
+        const velocity = Math.random() * 3 + 1.5;
+        const distance = Math.random() * 100 + 60;
+        
+        const deltaX = Math.cos(angle) * velocity;
+        const deltaY = Math.sin(angle) * velocity;
+        
+        // Use CSS animation for better performance
+        particle.animate([
+            { 
+                transform: 'translate(0, 0) scale(1)', 
+                opacity: 1 
+            },
+            { 
+                transform: `translate(${deltaX * 20}px, ${deltaY * 20}px) scale(0.8)`, 
+                opacity: 0.8 
+            },
+            { 
+                transform: `translate(${deltaX * 40}px, ${deltaY * 40}px) scale(0.6)`, 
+                opacity: 0.6 
+            },
+            { 
+                transform: `translate(${deltaX * distance}px, ${deltaY * distance}px) scale(0)`, 
+                opacity: 0 
+            }
+        ], {
+            duration: 1200,
+            easing: 'cubic-bezier(0.2, 0.8, 0.3, 1)'
+        }).onfinish = () => particle.remove();
+    }
+}
+
+// OPTIMIZED FLOATING ELEMENTS
+function createFloatingHeart() {
+    const heart = document.createElement('div');
+    heart.className = 'floating-heart';
+    heart.innerHTML = '❤️'; // Using emoji instead of icon for better performance
+    
+    // Random position
+    const startX = Math.random() * window.innerWidth;
+    heart.style.left = `${startX}px`;
+    heart.style.top = `${window.innerHeight + 10}px`;
+    
+    // Smaller size
+    const size = Math.random() * 20 + 15;
+    heart.style.fontSize = `${size}px`;
+    
+    document.body.appendChild(heart);
+    
+    // Optimized animation
+    const animation = heart.animate([
+        { 
+            top: `${window.innerHeight + 10}px`, 
+            opacity: 0, 
+            transform: 'translateY(0) scale(0.5)' 
+        },
+        { 
+            top: `${Math.random() * window.innerHeight * 0.5}px`, 
+            opacity: 0.7, 
+            transform: 'translateY(-20px) scale(1)' 
+        },
+        { 
+            top: `-30px`, 
+            opacity: 0, 
+            transform: 'translateY(-40px) scale(0.5)' 
+        }
+    ], {
+        duration: Math.random() * 3000 + 2000,
+        easing: 'cubic-bezier(0.2, 0.8, 0.3, 1)'
+    });
+    
+    animation.onfinish = () => heart.remove();
+}
+
+// CREATE MIDNIGHT EXPLOSION (OPTIMIZED)
+function createMidnightExplosion() {
+    // Reduced initial effects
+    for (let i = 0; i < 30; i++) { // Reduced from 80
+        setTimeout(() => {
+            createFirework();
+        }, i * 50); // Increased delay
+    }
+    
+    // Reduced confetti
+    for (let i = 0; i < 60; i++) { // Reduced from 150
+        setTimeout(() => {
+            createConfetti();
+        }, i * 30); // Increased delay
+    }
+    
+    // Reduced floating hearts
+    for (let i = 0; i < 20; i++) { // Reduced from 50
+        setTimeout(() => {
+            createFloatingHeart();
+        }, i * 100); // Increased delay
+    }
+}
+
+// START CELEBRATION (OPTIMIZED)
+function startCelebration() {
+    // Reduced initial effects
+    for (let i = 0; i < 12; i++) { // Reduced from 25
+        setTimeout(() => {
+            createFloatingHeart();
+        }, i * 500);
+    }
+    
+    // Optimized intervals with less frequent effects
+    setInterval(() => {
+        if (Math.random() > 0.85) createFloatingHeart(); // Less frequent
+        if (Math.random() > 0.95) createConfetti(); // Much less frequent
+    }, 5000); // Increased interval
+    
+    // Much less frequent fireworks
+    setInterval(() => {
+        if (Math.random() > 0.98) createFirework(); // Rare fireworks
+    }, 10000);
+}
+
+// OPTIMIZED MESSAGE ANIMATIONS
+function animateMessageParagraphs() {
+    const paragraphs = document.querySelectorAll('.message-paragraph');
+    
+    // Staggered animation with fewer animations at once
+    paragraphs.forEach((para, index) => {
+        // Only animate visible paragraphs
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        para.style.animation = 'floatUp 0.8s ease-out';
+                        para.style.opacity = '1';
+                        para.style.transform = 'translateY(0)';
+                    }, index * 150); // Increased delay
+                    observer.unobserve(para);
                 }
-            }, 4000);
-        }
-
-        // Create floating heart
-        function createFloatingHeart() {
-            const heart = document.createElement('div');
-            heart.className = 'floating-heart';
-            heart.innerHTML = '<i class="fas fa-heart"></i>';
-            
-            // Random position
-            const startX = Math.random() * window.innerWidth;
-            heart.style.left = `${startX}px`;
-            heart.style.top = `${window.innerHeight + 20}px`;
-            
-            // Random size
-            const size = Math.random() * 25 + 20;
-            heart.style.fontSize = `${size}px`;
-            
-            // Random color variation
-            const colors = ['#ff4081', '#ff2e63', '#ff6b9d'];
-            heart.style.color = colors[Math.floor(Math.random() * colors.length)];
-            
-            document.body.appendChild(heart);
-            
-            // Animate heart floating up
-            const animation = heart.animate([
-                { top: `${window.innerHeight + 20}px`, opacity: 0, transform: 'scale(0.5)' },
-                { top: `${Math.random() * window.innerHeight * 0.7}px`, opacity: 0.8, transform: 'scale(1)' },
-                { top: `-50px`, opacity: 0, transform: 'scale(0.5)' }
-            ], {
-                duration: Math.random() * 6000 + 4000,
-                easing: 'cubic-bezier(0.215, 0.610, 0.355, 1)'
             });
-            
-            // Horizontal movement
-            const endX = startX + (Math.random() * 200 - 100);
-            const horizontalAnimation = heart.animate([
-                { left: `${startX}px` },
-                { left: `${endX}px` }
-            ], {
-                duration: Math.random() * 6000 + 4000,
-                easing: 'cubic-bezier(0.445, 0.050, 0.550, 0.950)'
-            });
-            
-            // Remove heart after animation
-            animation.onfinish = () => {
-                heart.remove();
-            };
-        }
+        }, { threshold: 0.3 });
+        
+        observer.observe(para);
+    });
+}
 
+// OPTIMIZED CLICK HEARTS
+function createClickHeart(x, y) {
+    const heart = document.createElement('div');
+    heart.textContent = '❤️'; // Emoji for better performance
+    heart.style.position = 'fixed';
+    heart.style.left = `${x}px`;
+    heart.style.top = `${y}px`;
+    heart.style.color = '#ff4081';
+    heart.style.fontSize = '20px'; // Smaller
+    heart.style.pointerEvents = 'none';
+    heart.style.zIndex = '1000';
+    heart.style.transform = 'translate(-50%, -50%)';
+    
+    document.body.appendChild(heart);
+    
+    // Optimized animation
+    const animation = heart.animate([
+        { 
+            transform: 'translate(-50%, -50%) scale(0.5)', 
+            opacity: 1 
+        },
+        { 
+            transform: 'translate(-50%, -80px) scale(1.2)', 
+            opacity: 0.8 
+        },
+        { 
+            transform: 'translate(-50%, -120px) scale(0)', 
+            opacity: 0 
+        }
+    ], {
+        duration: 1000, // Faster
+        easing: 'cubic-bezier(0.2, 0.8, 0.3, 1)'
+    });
+    
+    animation.onfinish = () => heart.remove();
+}
+
+// OPTIMIZED ANIMATED GRAPHICS (For header area)
+function startAnimatedGraphics() {
+    // Reduced intervals
+    setInterval(() => {
+        createFloatingText();
+    }, 3000); // Increased from 2000
+    
+    setInterval(() => {
+        if (Math.random() > 0.7) createLoveLine(); // Less frequent
+    }, 2500); // Increased from 1500
+    
+    setInterval(() => {
+        if (Math.random() > 0.8) createHeartTrail(); // Less frequent
+    }, 2000); // Increased from 1000
+    
+    // Reduced initial burst
+    for (let i = 0; i < 5; i++) { // Reduced from 10
+        setTimeout(() => {
+            createFloatingText();
+            if (i % 3 === 0) createLoveLine(); // Less frequent
+            if (i % 4 === 0) createHeartTrail(); // Less frequent
+        }, i * 500); // Increased delay
+    }
+}
+
+// OPTIMIZED YEAR TRANSITION
+function startYearTransition() {
+    // Initial state
+    year2025.style.opacity = '1';
+    year2026.style.opacity = '0.3';
+    
+    // Smoother, less CPU-intensive animation
+    let opacity2025 = 1;
+    let opacity2026 = 0.3;
+    let growing = true;
+    
+    const yearAnimation = setInterval(() => {
+        if (growing) {
+            opacity2025 -= 0.015; // Slower
+            opacity2026 += 0.015;
+            
+            if (opacity2025 <= 0.3) {
+                growing = false;
+            }
+        } else {
+            opacity2025 += 0.015;
+            opacity2026 -= 0.015;
+            
+            if (opacity2025 >= 1) {
+                growing = true;
+            }
+        }
+        
+        year2025.style.opacity = opacity2025;
+        year2026.style.opacity = opacity2026;
+        
+        // Simpler glow effect
+        year2025.style.textShadow = `0 0 ${20 * opacity2025}px rgba(255, 64, 129, 0.7)`;
+        year2026.style.textShadow = `0 0 ${20 * opacity2026}px rgba(8, 217, 214, 0.7)`;
+    }, 80); // Increased interval
+    
+    // Stop earlier
+    setTimeout(() => {
+        clearInterval(yearAnimation);
+        year2025.style.opacity = '0.5';
+        year2026.style.opacity = '1';
+        year2025.style.textShadow = '0 0 10px rgba(255, 64, 129, 0.5)';
+        year2026.style.textShadow = '0 0 20px rgba(8, 217, 214, 0.7)';
+    }, 4000); // Reduced from 5000
+}
+
+// ADD CSS FOR OPTIMIZED PERFORMANCE
+const style = document.createElement('style');
+style.textContent = `
+    /* Optimize animations for performance */
+    .confetti, .firework, .floating-heart, .floating-sparkle {
+        will-change: transform, opacity;
+        transform: translateZ(0);
+        backface-visibility: hidden;
+    }
+    
+    /* Message paragraph optimized animations */
+    .message-paragraph {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    
+    /* Reduced particle sizes */
+    .confetti {
+        width: 8px;
+        height: 8px;
+    }
+    
+    .firework {
+        width: 4px;
+        height: 4px;
+    }
+    
+    .floating-heart {
+        font-size: 18px;
+    }
+`;
+document.head.appendChild(style);
+       
         // Create floating sparkle
         function createFloatingSparkle() {
             const sparkle = document.createElement('div');
@@ -1716,100 +1643,27 @@ function startCelebration() {
             };
         }
 
-        // Create firework effect
-        function createFirework() {
-            const particleCount = 50;
-            const posX = Math.random() * window.innerWidth;
-            const posY = Math.random() * (window.innerHeight / 2);
-            const colors = ['#ff2e63', '#08d9d6', '#ffd166', '#ff4081'];
-            const color = colors[Math.floor(Math.random() * colors.length)];
+        // Start background music with interaction handling
+        function startMusicWithInteraction() {
+            backgroundMusic.volume = 0.4;
             
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'firework';
-                particle.style.backgroundColor = color;
-                particle.style.left = `${posX}px`;
-                particle.style.top = `${posY}px`;
+            // Try to play immediately
+            backgroundMusic.play().then(() => {
+                console.log("Music started successfully");
+                playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+            }).catch(error => {
+                console.log("Autoplay blocked, waiting for user interaction");
+                playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
                 
-                document.body.appendChild(particle);
-                
-                // Random direction and distance
-                const angle = Math.random() * Math.PI * 2;
-                const velocity = Math.random() * 4 + 2;
-                const distance = Math.random() * 150 + 80;
-                
-                const deltaX = Math.cos(angle) * velocity;
-                const deltaY = Math.sin(angle) * velocity;
-                
-                let currentX = 0;
-                let currentY = 0;
-                let opacity = 1;
-                
-                const moveParticle = () => {
-                    currentX += deltaX;
-                    currentY += deltaY;
-                    opacity -= 0.015;
-                    
-                    particle.style.transform = `translate(${currentX}px, ${currentY}px)`;
-                    particle.style.opacity = opacity;
-                    
-                    const currentDistance = Math.sqrt(currentX * currentX + currentY * currentY);
-                    
-                    if (currentDistance < distance && opacity > 0) {
-                        requestAnimationFrame(moveParticle);
-                    } else {
-                        particle.remove();
-                    }
+                // Add a click listener to start music on first user interaction
+                const startOnInteraction = () => {
+                    backgroundMusic.play().then(() => {
+                        playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                    });
+                    document.removeEventListener('click', startOnInteraction);
                 };
-                
-                requestAnimationFrame(moveParticle);
-            }
-        }
-
-        // Create confetti
-        function createConfetti() {
-            const confettiCount = 20;
-            
-            for (let i = 0; i < confettiCount; i++) {
-                const confetti = document.createElement('div');
-                confetti.className = 'confetti';
-                
-                // Random position
-                const posX = Math.random() * window.innerWidth;
-                const colors = ['#ff2e63', '#08d9d6', '#ffd166', '#ff4081', '#9d4edd'];
-                const color = colors[Math.floor(Math.random() * colors.length)];
-                
-                confetti.style.left = `${posX}px`;
-                confetti.style.backgroundColor = color;
-                
-                // Random size and shape
-                const size = Math.random() * 15 + 8;
-                confetti.style.width = `${size}px`;
-                confetti.style.height = `${size}px`;
-                
-                if (Math.random() > 0.5) {
-                    confetti.style.borderRadius = '50%';
-                } else if (Math.random() > 0.7) {
-                    confetti.style.borderRadius = '0';
-                    confetti.style.transform = 'rotate(45deg)';
-                }
-                
-                document.body.appendChild(confetti);
-                
-                // Animate confetti
-                const animation = confetti.animate([
-                    { top: '-20px', opacity: 1, transform: 'rotate(0deg)' },
-                    { top: `${window.innerHeight + 20}px`, opacity: 0.7, transform: 'rotate(720deg)' }
-                ], {
-                    duration: Math.random() * 4000 + 3000,
-                    easing: 'cubic-bezier(0.215, 0.610, 0.355, 1)'
-                });
-                
-                // Remove confetti after animation
-                animation.onfinish = () => {
-                    confetti.remove();
-                };
-            }
+                document.addEventListener('click', startOnInteraction);
+            });
         }
 
         // Music player controls
@@ -1819,7 +1673,6 @@ function startCelebration() {
                     playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
                 }).catch(error => {
                     console.log("Playback failed:", error);
-                    // Show play button if autoplay was blocked
                     playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
                 });
             } else {
@@ -1848,34 +1701,7 @@ function startCelebration() {
             }
         });
 
-        function createClickHeart(x, y) {
-            const heart = document.createElement('div');
-            heart.innerHTML = '<i class="fas fa-heart"></i>';
-            heart.style.position = 'fixed';
-            heart.style.left = `${x}px`;
-            heart.style.top = `${y}px`;
-            heart.style.color = '#ff4081';
-            heart.style.fontSize = '24px';
-            heart.style.pointerEvents = 'none';
-            heart.style.zIndex = '1000';
-            heart.style.transform = 'translate(-50%, -50%)';
-            
-            document.body.appendChild(heart);
-            
-            // Animate heart
-            const animation = heart.animate([
-                { transform: 'translate(-50%, -50%) scale(0.5)', opacity: 1 },
-                { transform: 'translate(-50%, -100px) scale(1.5)', opacity: 0 }
-            ], {
-                duration: 1200,
-                easing: 'cubic-bezier(0.215, 0.610, 0.355, 1)'
-            });
-            
-            // Remove heart after animation
-            animation.onfinish = () => {
-                heart.remove();
-            };
-        }
-    </script>
+
+ </script>
 </body>
 </html>
